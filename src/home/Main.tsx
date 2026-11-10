@@ -1,10 +1,14 @@
-import BookText from '../components/BookText';
+import type { ReactNode } from 'react';
 
-const Main = () => {
+interface MainProps {
+  children: ReactNode;
+}
+
+const Main = ({ children }: MainProps) => {
   return (
-    <main className="book-info">
+    <main>
       <h1>My Reading List</h1>
-      <BookText />
+      {children}
     </main>
   );
 };
