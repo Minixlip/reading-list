@@ -7,12 +7,16 @@ import ResultCount from './components/ResultCount';
 import { BOOKS } from './data/books';
 
 function App() {
+  const unreadBooks = BOOKS.filter((book) => !book.is_read);
+  const readBooks = BOOKS.filter((book) => book.is_read);
+
   return (
     <div className="page">
       <Header />
       <Main>
         <ResultCount count={BOOKS.length} />
-        <BookList books={BOOKS} />
+        <BookList books={unreadBooks} heading="Unread" />
+        <BookList books={readBooks} heading="Read" />
       </Main>
       <Footer />
     </div>

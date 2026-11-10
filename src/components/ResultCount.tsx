@@ -1,9 +1,10 @@
 interface ResultCountProps {
   count: number;
+  label?: string;
 }
 
-const ResultCount = ({ count }: ResultCountProps) => {
-  return <p className="result-count">{count} books</p>;
+const ResultCount = ({ count, label = 'books' }: ResultCountProps) => {
+  return <p className="result-count">{count} {label}</p>;
 };
 
 export default ResultCount;
