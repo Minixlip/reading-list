@@ -34,3 +34,13 @@ src/task4-prop-errors.tsx(3,47): error TS2322: Type '{ title: string; auther: st
 ```
 
 All three mistakes were fixed in the final components; each card supplies the required props with the correct names and types.
+
+## Task 5: Rendering the shelf from data
+
+- Removing the key produced React's warning: `Each child in a list should have a unique "key" prop.` TypeScript still reported no errors.
+- Putting a key on the card's inner li still produced the same warning. The mapped BookCard element needs the key.
+- An array index can appear to work, but reordering, inserting, or deleting books changes which book owns each position. React can reuse a card's local state or input value for a different book. A book's stable id keeps its identity tied to the book.
+- Rendering `books.length && ...` with an empty array produced `<ul>0</ul>`. The final list uses `books.length === 0` and a ternary, so it renders the empty-state li instead.
+- React consumes `key`; reading it as a prop returned `undefined` and produced the warning that key is not a prop. BookCard receives only title, author, genre, and isRead.
+
+These warning and markup checks used React's development server renderer. The final full list and empty list both rendered without warnings.
