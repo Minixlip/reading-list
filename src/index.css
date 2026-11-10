@@ -1,0 +1,119 @@
+:root {
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --text: #1f2328;
+  --muted: #5f6672;
+  --accent: #2f5fd0;
+  --border: #d8d6cf;
+  --success: #2e7d4f;
+  --space: 1rem;
+  --radius: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.page {
+  max-width: 60rem;
+  margin-inline: auto;
+  padding: var(--space);
+}
+
+.book-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+}
+
+.book-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space);
+  padding: var(--space);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.book-card h3 {
+  margin: 0 0 0.25rem;
+}
+
+.book-meta,
+.result-count {
+  margin: 0;
+  color: var(--muted);
+}
+
+.book-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.is-read {
+  border-left: 6px solid var(--success);
+}
+
+.is-read h3 {
+  text-decoration: line-through;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  background: var(--success);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.btn {
+  padding: 0.4rem 0.8rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.empty-state {
+  padding: var(--space);
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .book-card {
+    flex-wrap: wrap;
+  }
+}
