@@ -1,14 +1,26 @@
 import BookText from './BookText';
 
 interface BookCardProps {
+  id: number;
   title: string;
   author: string;
   genre: string;
   isRead: boolean;
   pages?: number;
+  onToggleRead: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
-const BookCard = ({ title, author, genre, isRead, pages }: BookCardProps) => {
+const BookCard = ({
+  id,
+  title,
+  author,
+  genre,
+  isRead,
+  pages,
+  onToggleRead,
+  onDelete,
+}: BookCardProps) => {
   return (
     <li className={`book-card${isRead ? ' is-read' : ''}`}>
       <div className="book-info">
@@ -20,10 +32,16 @@ const BookCard = ({ title, author, genre, isRead, pages }: BookCardProps) => {
           type="button"
           className="btn"
           aria-label={`Mark ${title} as ${isRead ? 'unread' : 'read'}`}
+          onClick={() => onToggleRead(id)}
         >
           {isRead ? 'Mark unread' : 'Mark read'}
         </button>
-        <button type="button" className="btn" aria-label={`Delete ${title}`}>
+        <button
+          type="button"
+          className="btn"
+          aria-label={`Delete ${title}`}
+          onClick={() => onDelete(id)}
+        >
           Delete
         </button>
       </div>

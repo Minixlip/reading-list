@@ -5,9 +5,11 @@ import ResultCount from './ResultCount';
 interface BookListProps {
   books: Book[];
   heading?: string;
+  onToggleRead: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
-const BookList = ({ books, heading }: BookListProps) => {
+const BookList = ({ books, heading, onToggleRead, onDelete }: BookListProps) => {
   return (
     <section>
       {heading !== undefined && <h2>{heading}</h2>}
@@ -19,11 +21,14 @@ const BookList = ({ books, heading }: BookListProps) => {
           books.map((book) => (
             <BookCard
               key={book.id}
+              id={book.id}
               title={book.title}
               author={book.author}
               genre={book.genre}
               isRead={book.is_read}
               pages={book.pages}
+              onToggleRead={onToggleRead}
+              onDelete={onDelete}
             />
           ))
         )}
