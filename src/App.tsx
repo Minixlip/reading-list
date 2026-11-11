@@ -5,6 +5,7 @@ import Header from './home/Header';
 import Footer from './home/Footer';
 import BookList from './components/BookList';
 import ResultCount from './components/ResultCount';
+import ReadCounter from './components/ReadCounter';
 import { BOOKS } from './data/books';
 import type { Book } from './types/data/Books';
 
@@ -12,6 +13,7 @@ function App() {
   const [books, setBooks] = useState<Book[]>(BOOKS);
   const unreadBooks = books.filter((book) => !book.is_read);
   const readBooks = books.filter((book) => book.is_read);
+  const readCount = readBooks.length;
 
   const toggleRead = (id: number) => {
     setBooks((currentBooks) =>
@@ -30,6 +32,7 @@ function App() {
       <Header />
       <Main>
         <ResultCount count={books.length} />
+        <ReadCounter readCount={readCount} total={books.length} />
         <button type="button" className="btn" onClick={() => setBooks(BOOKS)}>
           Reset shelf
         </button>
