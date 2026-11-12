@@ -3,17 +3,21 @@ import { useState } from 'react';
 import Main from './home/Main';
 import Header from './home/Header';
 import Footer from './home/Footer';
-import BookList from './components/BookList';
-import ResultCount from './components/ResultCount';
-import ReadCounter from './components/ReadCounter';
+import FilterBar from './components/FilterBar';
+import Shelf from './components/Shelf';
 import { BOOKS } from './data/books';
 import type { Book } from './types/data/Books';
+import type { StatusFilter } from './types';
 
 function App() {
   const [books, setBooks] = useState<Book[]>(BOOKS);
-  const unreadBooks = books.filter((book) => !book.is_read);
-  const readBooks = books.filter((book) => book.is_read);
-  const readCount = readBooks.length;
+  const [filter, setFilter] = useState<StatusFilter>('all');
+  const visibleBooks = books.filter((book) =>
+    filter === 'all' ||
+    (filter === 'read' && book.is_read) ||
+    (filter === 'unread' && !book.is_read),
+  );
+  const readCount = books.filter((book) => book.is_read).length;
 
   const toggleRead = (id: number) => {
     setBooks((currentBooks) =>
@@ -31,20 +35,14 @@ function App() {
     <div className="page">
       <Header />
       <Main>
-        <ResultCount count={books.length} />
-        <ReadCounter readCount={readCount} total={books.length} />
+        <FilterBar current={filter} onChange={setFilter} />
         <button type="button" className="btn" onClick={() => setBooks(BOOKS)}>
           Reset shelf
         </button>
-        <BookList
-          books={unreadBooks}
-          heading="Unread"
-          onToggleRead={toggleRead}
-          onDelete={deleteBook}
-        />
-        <BookList
-          books={readBooks}
-          heading="Read"
+        <Shelf
+          books={visibleBooks}
+          readCount={readCount}
+          total={books.length}
           onToggleRead={toggleRead}
           onDelete={deleteBook}
         />

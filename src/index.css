@@ -106,6 +106,19 @@ body {
   outline-offset: 2px;
 }
 
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: var(--space);
+}
+
+.btn.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
 .empty-state {
   padding: var(--space);
   color: var(--muted);
