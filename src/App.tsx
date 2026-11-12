@@ -8,15 +8,26 @@ import Shelf from './components/Shelf';
 import { BOOKS } from './data/books';
 import type { Book } from './types/data/Books';
 import type { StatusFilter } from './types';
+import SearchBox from './components/SearchBox';
 
 function App() {
   const [books, setBooks] = useState<Book[]>(BOOKS);
   const [filter, setFilter] = useState<StatusFilter>('all');
-  const visibleBooks = books.filter((book) =>
-    filter === 'all' ||
-    (filter === 'read' && book.is_read) ||
-    (filter === 'unread' && !book.is_read),
-  );
+  const [search, setSearch] = useState('');
+
+  const visibleBooks = books
+    .filter(
+      (book) =>
+        filter === 'all' ||
+        (filter === 'read' && book.is_read) ||
+        (filter === 'unread' && !book.is_read),
+    )
+    .filter(
+      (book) =>
+        book.title.toLowerCase().includes(search) ||
+        book.author.toLowerCase().includes(search),
+    );
+
   const readCount = books.filter((book) => book.is_read).length;
 
   const toggleRead = (id: number) => {
@@ -35,8 +46,19 @@ function App() {
     <div className="page">
       <Header />
       <Main>
-        <FilterBar current={filter} onChange={setFilter} />
-        <button type="button" className="btn" onClick={() => setBooks(BOOKS)}>
+        <SearchBox
+          value={search}
+          onChange={setSearch}
+        />
+        <FilterBar
+          current={filter}
+          onChange={setFilter}
+        />
+        <button
+          type="button"
+          className="btn"
+          onClick={() => setBooks(BOOKS)}
+        >
           Reset shelf
         </button>
         <Shelf
