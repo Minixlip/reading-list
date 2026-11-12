@@ -9,11 +9,15 @@ import { BOOKS } from './data/books';
 import type { Book } from './types/data/Books';
 import type { StatusFilter } from './types';
 import SearchBox from './components/SearchBox';
+import GenreSelect from './components/GenreSelect';
+import PagesOnlyToggle from './components/PagesOnlyToggle';
 
 function App() {
   const [books, setBooks] = useState<Book[]>(BOOKS);
   const [filter, setFilter] = useState<StatusFilter>('all');
   const [search, setSearch] = useState('');
+  const [genre, setGenre] = useState('');
+  const [pages, setPages] = useState(false);
 
   const visibleBooks = books
     .filter(
@@ -26,7 +30,9 @@ function App() {
       (book) =>
         book.title.toLowerCase().includes(search) ||
         book.author.toLowerCase().includes(search),
-    );
+    )
+    .filter((book) => (genre === '' ? true : book.genre === genre))
+    .filter((book) => (pages === true ? book.pages !== undefined : true));
 
   const readCount = books.filter((book) => book.is_read).length;
 
@@ -46,10 +52,20 @@ function App() {
     <div className="page">
       <Header />
       <Main>
-        <SearchBox
-          value={search}
-          onChange={setSearch}
-        />
+        <div className="filter-bar">
+          <SearchBox
+            value={search}
+            onChange={setSearch}
+          />
+          <GenreSelect
+            value={genre}
+            onChange={setGenre}
+          />
+          <PagesOnlyToggle
+            value={pages}
+            onChange={setPages}
+          />
+        </div>
         <FilterBar
           current={filter}
           onChange={setFilter}

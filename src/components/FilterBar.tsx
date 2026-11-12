@@ -7,32 +7,39 @@ interface FilterBarProps {
 
 const FilterBar = ({ current, onChange }: FilterBarProps) => {
   return (
-    <div className="filter-bar" role="group" aria-label="Filter books by read status">
-      <button
-        type="button"
-        className={`btn${current === 'all' ? ' is-active' : ''}`}
-        aria-pressed={current === 'all'}
-        onClick={() => onChange('all')}
-      >
+    <fieldset className="filter-bar">
+      <legend>Status</legend>
+      <label>
+        <input
+          type="radio"
+          name="status"
+          value="all"
+          checked={current === 'all'}
+          onChange={() => onChange('all')}
+        />
         All
-      </button>
-      <button
-        type="button"
-        className={`btn${current === 'read' ? ' is-active' : ''}`}
-        aria-pressed={current === 'read'}
-        onClick={() => onChange('read')}
-      >
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="status"
+          value="read"
+          checked={current === 'read'}
+          onChange={() => onChange('read')}
+        />
         Read
-      </button>
-      <button
-        type="button"
-        className={`btn${current === 'unread' ? ' is-active' : ''}`}
-        aria-pressed={current === 'unread'}
-        onClick={() => onChange('unread')}
-      >
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="status"
+          value="unread"
+          checked={current === 'unread'}
+          onChange={() => onChange('unread')}
+        />
         Unread
-      </button>
-    </div>
+      </label>
+    </fieldset>
   );
 };
 

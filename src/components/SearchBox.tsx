@@ -7,7 +7,7 @@ interface SearchBoxProps {
 
 const SearchBox = ({ value, onChange }: SearchBoxProps) => {
   function handleOnChange(event: ChangeEvent<HTMLInputElement>): void {
-    const searchVal = event.target.value.trim();
+    const searchVal = event.target.value;
 
     console.log(searchVal);
     onChange(searchVal.toLocaleLowerCase());
