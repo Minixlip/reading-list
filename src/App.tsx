@@ -11,6 +11,8 @@ import type { StatusFilter } from './types';
 import SearchBox from './components/SearchBox';
 import GenreSelect from './components/GenreSelect';
 import PagesOnlyToggle from './components/PagesOnlyToggle';
+import type { FormValues } from './lib/validate';
+import BookForm from './components/BookForm';
 
 function App() {
   const [books, setBooks] = useState<Book[]>(BOOKS);
@@ -48,6 +50,14 @@ function App() {
     setBooks((currentBooks) => currentBooks.filter((book) => book.id !== id));
   };
 
+  const addBook = (values: FormValues) => {
+    setBooks((currentBooks) => {
+      const id = Math.max(0, ...currentBooks.map((book) => book.id)) + 1;
+
+      return [...currentBooks, { ...values, id, is_read: false }];
+    });
+  };
+
   return (
     <div className="page">
       <Header />
@@ -77,6 +87,7 @@ function App() {
         >
           Reset shelf
         </button>
+        <BookForm onAddBook={addBook} />
         <Shelf
           books={visibleBooks}
           readCount={readCount}
