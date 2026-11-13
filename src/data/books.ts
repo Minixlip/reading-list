@@ -8,6 +8,8 @@ export const BOOKS: Book[] = [
     genre: 'sci-fi',
     is_read: true,
     pages: 612,
+    pages_read: 612,
+    rating: 4,
   },
   {
     id: 2,
@@ -16,6 +18,7 @@ export const BOOKS: Book[] = [
     genre: 'fantasy',
     is_read: false,
     pages: 272,
+    pages_read: 100,
   },
   {
     id: 3,
@@ -39,6 +42,7 @@ export const BOOKS: Book[] = [
     genre: 'sci-fi',
     is_read: false,
     pages: 304,
+    pages_read: 120,
   },
   {
     id: 6,
@@ -93,5 +97,6 @@ export const BOOKS: Book[] = [
     genre: 'fantasy',
     is_read: true,
     pages: 310,
+    rating: 4,
   },
 ];

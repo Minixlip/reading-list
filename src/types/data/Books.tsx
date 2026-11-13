@@ -5,4 +5,7 @@ export interface Book {
   genre: string;
   is_read: boolean;
   pages?: number;
+  pages_read?: number;
+  rating?: number;
+  review?: string;
 }
